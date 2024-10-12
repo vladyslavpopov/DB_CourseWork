@@ -146,7 +146,7 @@
 **Діаграма прецедентів**
 
 </center>
-1. Сценарій NewsPublication
+#Сценарій NewsPublication
 
 | ID               | NewsPublication |
 |----------------------|-----------------|
@@ -189,7 +189,7 @@ end note
 stop;
 @enduml
 
-2. Сценарій CommentModeration
+# Сценарій CommentModeration
 
    | ID               | CommentModeration |
 |----------------------|-----------------|
