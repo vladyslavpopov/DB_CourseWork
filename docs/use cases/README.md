@@ -2,6 +2,13 @@
 
 ## Діаграма прецедентів
 
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;"
+>
+
 @startuml
 
 actor "Гість" as Guest
@@ -57,6 +64,8 @@ Moderator -d-> UC_4.4
 
 @enduml
 
+</center>
+
 ### Схема гостя
 <center style="
     border-radius:4px;
@@ -64,8 +73,7 @@ Moderator -d-> UC_4.4
     box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
     padding: 1em;"
 >
-</center>
-
+    
 @startuml
 
 actor "Гість" as Guest
@@ -78,7 +86,9 @@ Guest -u-> UC_1.2
 
 @enduml
 
-### Схема користувача і модератора
+</center>
+
+### Схема користувача, модератора і адміністратора
 <center style="
     border-radius:4px;
     border: 1px solid #cfd7e6;
@@ -90,6 +100,7 @@ Guest -u-> UC_1.2
 
 actor "Користувач" as User
 actor "Модератор" as Moderator
+actor "Адміністратор системи" as Admin
 
 usecase "UserRegistration\nРеєстрація користувача в системі" as UC_1.1
 usecase "UserAuthorization\nАвторизація користувача" as UC_1.2
@@ -117,15 +128,8 @@ Moderator ..> UC_4.1
 Moderator -d-> UC_4.3
 Moderator -d-> UC_4.4
 
+Admin ..> UC_2.1
+
 @enduml
 
-</center>
-
-### Схема адміністратора
-<center style="
-    border-radius:4px;
-    border: 1px solid #cfd7e6;
-    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
-    padding: 1em;"
->
 </center>
