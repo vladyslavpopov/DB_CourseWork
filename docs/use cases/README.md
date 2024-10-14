@@ -66,6 +66,18 @@ Moderator -d-> UC_4.4
 >
 </center>
 
+@startuml
+
+actor "Гість" as Guest
+
+usecase "UserRegistration\nРеєстрація користувача в системі" as UC_1.1
+usecase "UserAuthorization\nАвторизація користувача" as UC_1.2
+
+Guest -u-> UC_1.1
+Guest -u-> UC_1.2
+
+@enduml
+
 ### Схема користувача і модератора
 <center style="
     border-radius:4px;
