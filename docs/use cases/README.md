@@ -1,16 +1,6 @@
 # Модель прецедентів
 
-В цьому файлі необхідно перелічити всі документи, розроблені в проекті та дати посилання на них.
-
-*Модель прецедентів повинна містити загальні оглядові діаграми та специфікації прецедентів.*
-
-
-
-Вбудовування зображень діаграм здійснюється з використанням сервісу [plantuml.com](https://plantuml.com/). 
-
-В markdown-файлі використовується опис діаграми
-
-```md
+## Діаграма прецедентів
 
 <center style="
     border-radius:4px;
@@ -21,129 +11,80 @@
 
 @startuml
 
-    right header
-        <font size=24 color=black>Package: <b>UCD_3.0
-    end header
+actor "Гість" as Guest
+actor "Користувач" as User
+actor "Модератор" as Moderator
+actor "Журналіст" as Journalist
+actor "Редактор" as Editor
+actor "Адміністратор системи" as Admin
 
-    title
-        <font size=18 color=black>UC_8. Редагувати конфігурацію порталу
-        <font size=16 color=black>Діаграма прецедентів
-    end title
+usecase "UserRegistration\nРеєстрація користувача в системі" as UC_1.1
+usecase "UserAuthorization\nАвторизація користувача" as UC_1.2
 
+usecase "Media content management\nПошук та управління медіа-контентом" as UC_2.1
+usecase "MediaFind\nПошук медіа-контенту користувачем" as UC_2.2
+usecase "MediaCreate\nСтворення медіа-контенту користувачем" as UC_2.3
 
-    actor "Користувач" as User #eeeeaa
-    
-    package UCD_1{
-        usecase "<b>UC_1</b>\nПереглянути список \nзвітів" as UC_1 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1</b>\nЗастосувати фільтр" as UC_1.1
-    usecase "<b>UC_1.2</b>\nПереглянути метадані \nзвіту" as UC_1.2  
-    usecase "<b>UC_1.2.1</b>\nДати оцінку звіту" as UC_1.2.1  
-    usecase "<b>UC_1.2.2</b>\nПереглянути інформацію \nпро авторів звіту" as UC_1.2.2
-    
-    package UCD_1 {
-        usecase "<b>UC_4</b>\nВикликати звіт" as UC_4 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1.1</b>\n Використати \nпошукові теги" as UC_1.1.1  
-    usecase "<b>UC_1.1.2</b>\n Використати \nрядок пошуку" as UC_1.1.2
-    usecase "<b>UC_1.1.3</b>\n Використати \nавторів" as UC_1.1.3  
-    
-    
-    
-    User -> UC_1
-    UC_1.1 .u.> UC_1 :extends
-    UC_1.2 .u.> UC_1 :extends
-    UC_4 .d.> UC_1.2 :extends
-    UC_1.2 .> UC_1.2 :extends
-    UC_1.2.1 .u.> UC_1.2 :extends
-    UC_1.2.2 .u.> UC_1.2 :extends
-    UC_1 ..> UC_1.2.2 :extends
-    
-    
-    UC_1.1.1 -u-|> UC_1.1
-    UC_1.1.2 -u-|> UC_1.1
-    UC_1.1.3 -u-|> UC_1.1
-    
-    right footer
-        Аналітичний портал. Модель прецедентів.
-        НТУУ КПІ ім.І.Сікорського
-        Киів-2020
-    end footer
+usecase "NewsPublication\nПублікація новинного контенту на веб-сайті" as UC_3.1
+usecase "CreateArticle\nСтворення статті" as UC_3.2
+usecase "ReviewArticle \n Рецензування статті" as UC_3.3
+usecase "PublishArticle\Підтвердження публікації статті" as UC_3.4
+
+usecase "CommentModeration\nМодерація коментарів у соціальній мережі" as UC_4.1
+usecase "CreateComment\nСтворення коментаря" as UC_4.2
+usecase "PublishComment\Підтвердження публікації коментаря" as UC_4.3
+usecase "DeleteComment\Видалення коментаря" as UC_4.4
+
+Guest -u-> UC_1.1
+Guest -u-> UC_1.2
+
+User -u-|> Guest
+User ..> UC_4.1
+User -d-> UC_2.1
+User -l-> UC_4.2
+
+Admin ..> UC_2.1
+
+UC_2.2 -u-> UC_2.1: extends
+UC_2.3 -u-> UC_2.1: extends
+
+Journalist -l-|> User
+Journalist -u-> UC_3.2
+Journalist ..> UC_3.1
+
+Editor -d-|> User
+Editor -u-> UC_3.3
+Editor -u-> UC_3.4
+Editor ..> UC_3.1
+
+Moderator -u-|> User
+Moderator ..> UC_4.1
+Moderator -d-> UC_4.3
+Moderator -d-> UC_4.4
 
 @enduml
-
-**Діаграма прецедентів**
 
 </center>
-```
 
-яка буде відображена наступним чином
-
+### Схема гостя
 <center style="
     border-radius:4px;
     border: 1px solid #cfd7e6;
     box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
     padding: 1em;"
 >
-
+    
 @startuml
 
-    right header
-        <font size=24 color=black>Package: <b>UCD_3.0
-    end header
+actor "Гість" as Guest
 
-    title
-        <font size=18 color=black>UC_8. Редагувати конфігурацію порталу
-        <font size=16 color=black>Діаграма прецедентів
-    end title
+usecase "UserRegistration\nРеєстрація користувача в системі" as UC_1.1
+usecase "UserAuthorization\nАвторизація користувача" as UC_1.2
 
-
-    actor "Користувач" as User #eeeeaa
-    
-    package UCD_1{
-        usecase "<b>UC_1</b>\nПереглянути список \nзвітів" as UC_1 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1</b>\nЗастосувати фільтр" as UC_1.1
-    usecase "<b>UC_1.2</b>\nПереглянути метадані \nзвіту" as UC_1.2  
-    usecase "<b>UC_1.2.1</b>\nДати оцінку звіту" as UC_1.2.1  
-    usecase "<b>UC_1.2.2</b>\nПереглянути інформацію \nпро авторів звіту" as UC_1.2.2
-    
-    package UCD_1 {
-        usecase "<b>UC_4</b>\nВикликати звіт" as UC_4 #aaeeaa
-    }
-    
-    usecase "<b>UC_1.1.1</b>\n Використати \nпошукові теги" as UC_1.1.1  
-    usecase "<b>UC_1.1.2</b>\n Використати \nрядок пошуку" as UC_1.1.2
-    usecase "<b>UC_1.1.3</b>\n Використати \nавторів" as UC_1.1.3  
-    
-    
-    
-    User -> UC_1
-    UC_1.1 .u.> UC_1 :extends
-    UC_1.2 .u.> UC_1 :extends
-    UC_4 .d.> UC_1.2 :extends
-    UC_1.2 .> UC_1.2 :extends
-    UC_1.2.1 .u.> UC_1.2 :extends
-    UC_1.2.2 .u.> UC_1.2 :extends
-    UC_1 ..> UC_1.2.2 :extends
-    
-    
-    UC_1.1.1 -u-|> UC_1.1
-    UC_1.1.2 -u-|> UC_1.1
-    UC_1.1.3 -u-|> UC_1.1
-    
-    right footer
-        Аналітичний портал. Модель прецедентів.
-        НТУУ КПІ ім.І.Сікорського
-        Киів-2020
-    end footer
+Guest -u-> UC_1.1
+Guest -u-> UC_1.2
 
 @enduml
-
-**Діаграма прецедентів**
 
 </center>
 #Сценарій NewsPublication
@@ -238,3 +179,48 @@ end note
 stop;
 @enduml
 
+### Схема користувача, модератора і адміністратора
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;"
+>
+    
+@startuml
+
+actor "Користувач" as User
+actor "Модератор" as Moderator
+actor "Адміністратор системи" as Admin
+
+usecase "UserRegistration\nРеєстрація користувача в системі" as UC_1.1
+usecase "UserAuthorization\nАвторизація користувача" as UC_1.2
+
+usecase "Media content management\nПошук та управління медіа-контентом" as UC_2.1
+usecase "MediaFind\nПошук медіа-контенту користувачем" as UC_2.2
+usecase "MediaCreate\nСтворення медіа-контенту користувачем" as UC_2.3
+usecase "CreateComment\nСтворення коментаря" as UC_4.2
+
+usecase "CommentModeration\nМодерація коментарів у соціальній мережі" as UC_4.1
+usecase "PublishComment\nПідтвердження публікації коментаря" as UC_4.3
+usecase "DeleteComment\nВидалення коментаря" as UC_4.4
+
+User -d-> UC_1.1
+User -d-> UC_1.2
+User -d-> UC_2.1
+User -l-> UC_4.2
+User ..> UC_4.1
+
+UC_2.2 -u-> UC_2.1: extends
+UC_2.3 -u-> UC_2.1: extends
+
+Moderator -u-|> User
+Moderator ..> UC_4.1
+Moderator -d-> UC_4.3
+Moderator -d-> UC_4.4
+
+Admin ..> UC_2.1
+
+@enduml
+
+</center>
