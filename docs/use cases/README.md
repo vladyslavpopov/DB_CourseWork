@@ -134,7 +134,7 @@ Admin ..> UC_2.1
 
 </center>
 
-#Сценарій NewsPublication
+### Сценарій NewsPublication
 
 
 | ID               | NewsPublication |
@@ -177,7 +177,7 @@ end note
 stop;
 @enduml
 
-# Сценарій CommentModeration
+### Сценарій CommentModeration
 
    | ID               | CommentModeration |
 |----------------------|-----------------|
@@ -225,7 +225,7 @@ end note
 stop;
 @enduml
 
-# Сценарій MediaCreate
+### Сценарій MediaCreate
 
 | **ID**              | MediaCreate                             |
 |-----------------|----------------------------------------|
@@ -275,7 +275,7 @@ end note
 stop;
 @enduml
 
-# Сценарій MediaFind
+### Сценарій MediaFind
 
 | **ID**              | MediaFind                              |
 |-----------------|----------------------------------------|
@@ -335,7 +335,7 @@ stop;
 
 </center>
 
-# Сценарій UserAuthorization
+### Сценарій UserAuthorization
 
 | ID               | UserAuthorization | 
 |----------------------|-----------------| 
