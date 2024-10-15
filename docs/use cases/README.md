@@ -332,9 +332,10 @@ stop;
     end footer
 
 @enduml
+</center>
 
 ### Сценарій Registration
-</center>
+
 | **ID**              | UserRegistration | 
 |----------------------|-----------------| 
 | **НАЗВА**            | Реєстрація користувача в системі | 
