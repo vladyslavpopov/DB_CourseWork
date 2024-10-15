@@ -287,3 +287,63 @@ end note
 
 stop;
 @enduml
+
+# Сценарій MediaFind
+
+| **ID**              | MediaFind                              |
+|-----------------|----------------------------------------|
+| **НАЗВА**       | Пошук медіа-контенту користувачем      |
+| **УЧАСНИКИ**   | Користувач, адміністратор системи      |
+| **ПЕРЕДУМОВИ**  | 1. Користувач має доступ до інформаційної системи.<br>2. Користувач зареєстрований в системі.<br>3. База даних медіа-контенту актуальна і містить інформацію. |
+| **РЕЗУЛЬТАТ**   | Користувач отримує релевантні результати медіа-контенту згідно з його запитом. |
+| **ВИКЛЮЧНІ СИТУАЦІЇ** | 1. NoAccessException — користувач не може здійснити пошук через проблеми з підключенням, або проблеми на стороні сервера.<br>2. ContentNotFoundException — запит користувача не дав жодних результатів. Користувач отримує повідомлення про те, що контент не знайдено.<br>3. InsufficientPermissionException — користувач намагається отримати доступ до контенту, який потребує спеціальних прав, яких не має користувач. |
+| **ОСНОВНИЙ СЦЕНАРІЙ** | 1. Користувач відкриває інформаційну систему.<br>2. Вводить ключові слова для пошуку медіа-контенту у відповідне поле.<br>3. Система обробляє запит і здійснює пошук в базі даних.<br>4. Система повертає список релевантних даних.<br>5. Користувач переглядає результати.<br>6. Користувач завершує сесію, або продовжує пошук. |                                                                             
+
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;"
+>
+
+@startuml
+
+    right header
+        <font size=24 color=black>Package: <b>MediaFind
+    end header
+
+    title
+        <font size=18 color=black>UC_MediaFind. Пошук медіа-контенту користувачем
+        <font size=16 color=black>Діаграма прецедентів
+    end title
+
+    actor "Користувач" as User #eeeeaa
+    actor "Адміністратор системи" as Admin #eeeeaa
+    
+    usecase "<b>UC_MF_1</b>\nПошук медіа-контенту" as UC_MF_1 #aaeeaa
+    usecase "<b>UC_MF_2</b>\nПерегляд результатів\nпошуку" as UC_MF_2
+    usecase "<b>UC_MF_3</b>\nОбробка запиту\nсистемою" as UC_MF_3
+    usecase "<b>UC_MF_4</b>\nЗавершення сесії" as UC_MF_4
+    
+    package Exceptions {
+        usecase "<b>NoAccessException</b>\nПроблеми з доступом" as Exc_1
+        usecase "<b>ContentNotFoundException</b>\nКонтент не знайдено" as Exc_2
+        usecase "<b>InsufficientPermissionException</b>\nНедостатньо прав" as Exc_3
+    }
+    
+    User -> UC_MF_1
+    UC_MF_1 --> UC_MF_3
+    UC_MF_3 --> UC_MF_2
+    UC_MF_2 --> UC_MF_4
+    
+    UC_MF_3 .u.> Exc_1 :extends
+    UC_MF_3 .u.> Exc_2 :extends
+    UC_MF_3 .u.> Exc_3 :extends
+
+    right footer
+        Система аналізу медіа-контенту. Діаграма прецедентів.
+    end footer
+
+@enduml
+
+</center>
