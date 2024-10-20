@@ -89,6 +89,32 @@ UC_2.5 .l.> UC_1.1 : extends
 
 </center>
 
+### Схема адміністратора
+<center style="
+    border-radius:4px;
+    border: 1px solid #cfd7e6;
+    box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
+    padding: 1em;"
+>
+    
+@startuml
+
+actor "Адміністратор" as Administrator
+
+usecase "User management\nКерування користувачем" as UC_1.1
+
+usecase "DeleteUser\nВидалення користувача" as UC_2.1
+usecase "PromoteUser\nПідвищення ролі користувача" as UC_2.2
+
+Administrator -d-> UC_1.1
+
+UC_2.1 .u.> UC_1.1 : extends
+UC_2.2 .u.> UC_1.1 : extends
+
+@enduml
+
+</center>
+
 ### Сценарій CommentModeration
 
    | ID               | CommentModeration |
@@ -383,22 +409,6 @@ stop;
 |                       |4. Перевіряються дані авторизації | 
 |                       |5. Користувач отримує доступ до свого облікового запису| 
 
-
-@startuml
-
-actor "Адміністратор" as Administrator
-
-usecase "User management\nКерування користувачем" as UC_1.1
-
-usecase "DeleteUser\nВидалення користувача" as UC_2.1
-usecase "PromoteUser\nПідвищення ролі користувача" as UC_2.2
-
-Administrator -d-> UC_1.1
-
-UC_2.1 .u.> UC_1.1 : extends
-UC_2.2 .u.> UC_1.1 : extends
-
-@enduml
 
 ### Сценарій DeleteAccount
 
