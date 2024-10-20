@@ -8,59 +8,28 @@
     box-shadow: 0 1px 3px 0 rgba(89,105,129,.05), 0 1px 1px 0 rgba(0,0,0,.025);
     padding: 1em;"
 >
-
+    
 @startuml
 
 actor "Гість" as Guest
 actor "Користувач" as User
-actor "Модератор" as Moderator
-actor "Журналіст" as Journalist
-actor "Редактор" as Editor
 actor "Адміністратор системи" as Admin
 
 usecase "UserRegistration\nРеєстрація користувача в системі" as UC_1.1
 usecase "UserAuthorization\nАвторизація користувача" as UC_1.2
 
-usecase "Media content management\nПошук та управління медіа-контентом" as UC_2.1
-usecase "MediaFind\nПошук медіа-контенту користувачем" as UC_2.2
-usecase "MediaCreate\nСтворення медіа-контенту користувачем" as UC_2.3
-
-usecase "NewsPublication\nПублікація новинного контенту на веб-сайті" as UC_3.1
-usecase "CreateArticle\nСтворення статті" as UC_3.2
-usecase "ReviewArticle \n Рецензування статті" as UC_3.3
-usecase "PublishArticle\Підтвердження публікації статті" as UC_3.4
-
-usecase "CommentModeration\nМодерація коментарів у соціальній мережі" as UC_4.1
-usecase "CreateComment\nСтворення коментаря" as UC_4.2
-usecase "PublishComment\Підтвердження публікації коментаря" as UC_4.3
-usecase "DeleteComment\Видалення коментаря" as UC_4.4
-
 Guest -u-> UC_1.1
 Guest -u-> UC_1.2
 
+usecase "Media content management\nПошук та управління медіа-контентом" as UC_2
+
 User -u-|> Guest
-User ..> UC_4.1
-User -d-> UC_2.1
-User -l-> UC_4.2
+User -d-> UC_2
 
-Admin ..> UC_2.1
+usecase "User management\nКерування користувачем" as UC_3
 
-UC_2.2 -u-> UC_2.1: extends
-UC_2.3 -u-> UC_2.1: extends
-
-Journalist -l-|> User
-Journalist -u-> UC_3.2
-Journalist ..> UC_3.1
-
-Editor -d-|> User
-Editor -u-> UC_3.3
-Editor -u-> UC_3.4
-Editor ..> UC_3.1
-
-Moderator -u-|> User
-Moderator ..> UC_4.1
-Moderator -d-> UC_4.3
-Moderator -d-> UC_4.4
+Admin -u-|> Guest
+Admin -d-> UC_3
 
 @enduml
 
@@ -88,7 +57,7 @@ Guest -u-> UC_1.2
 
 </center>
 
-### Схема користувача, модератора і адміністратора
+### Схема користувача
 <center style="
     border-radius:4px;
     border: 1px solid #cfd7e6;
@@ -99,36 +68,22 @@ Guest -u-> UC_1.2
 @startuml
 
 actor "Користувач" as User
-actor "Модератор" as Moderator
-actor "Адміністратор системи" as Admin
 
-usecase "UserRegistration\nРеєстрація користувача в системі" as UC_1.1
-usecase "UserAuthorization\nАвторизація користувача" as UC_1.2
+usecase "Media content management\nПошук та управління медіа-контентом" as UC_1.1
 
-usecase "Media content management\nПошук та управління медіа-контентом" as UC_2.1
-usecase "MediaFind\nПошук медіа-контенту користувачем" as UC_2.2
-usecase "MediaCreate\nСтворення медіа-контенту користувачем" as UC_2.3
-usecase "CreateComment\nСтворення коментаря" as UC_4.2
-
-usecase "CommentModeration\nМодерація коментарів у соціальній мережі" as UC_4.1
-usecase "PublishComment\nПідтвердження публікації коментаря" as UC_4.3
-usecase "DeleteComment\nВидалення коментаря" as UC_4.4
+usecase "MediaFind\nПошук медіа-контенту користувачем" as UC_2.1
+usecase "MediaCreate\nСтворення медіа-контенту користувачем" as UC_2.2
+usecase "CommentModeration\nМодерація коментарів у соціальній мережі" as UC_2.3
+usecase "EditContent\nРедагування медіа-контенту" as UC_2.4
+usecase "DeleteContent\nВидалення медіа-контенту" as UC_2.5
 
 User -d-> UC_1.1
-User -d-> UC_1.2
-User -d-> UC_2.1
-User -l-> UC_4.2
-User ..> UC_4.1
 
-UC_2.2 -u-> UC_2.1: extends
-UC_2.3 -u-> UC_2.1: extends
-
-Moderator -u-|> User
-Moderator ..> UC_4.1
-Moderator -d-> UC_4.3
-Moderator -d-> UC_4.4
-
-Admin ..> UC_2.1
+UC_2.1 .r.> UC_1.1 : extends
+UC_2.2 .u.> UC_1.1 : extends
+UC_2.3 .u.> UC_1.1 : extends
+UC_2.4 .u.> UC_1.1 : extends
+UC_2.5 .l.> UC_1.1 : extends
 
 @enduml
 
@@ -428,39 +383,21 @@ stop;
 |                       |4. Перевіряються дані авторизації | 
 |                       |5. Користувач отримує доступ до свого облікового запису| 
 
+
 @startuml
 
-|Користувач|
-start;
-: Відкриває сторінку входу;
+actor "Адміністратор" as Administrator
 
-: Вводить дані для авторизації;
+usecase "User management\nКерування користувачем" as UC_1.1
 
-|Система|
-: Перевіряє обліковий запис;
-: Перевіряє дані авторизації;
+usecase "DeleteUser\nВидалення користувача" as UC_2.1
+usecase "PromoteUser\nПідвищення ролі користувача" as UC_2.2
 
-note right #FF6969
-<b> Можлива виключна ситуація
-<b> InvalidCredentials
-end note
+Administrator -d-> UC_1.1
 
-note right #FF6969
-<b> Можлива виключна ситуація
-<b> NotRegistered
-end note
+UC_2.1 .u.> UC_1.1 : extends
+UC_2.2 .u.> UC_1.1 : extends
 
-note right #FF6969
-<b> Можлива виключна ситуація
-<b> TooManyAttempts
-end note
-
-: Якщо дані коректні, надає доступ до облікового запису;
-
-|Користувач|
-: Отримує підтвердження та доступ до свого профілю;
-
-stop;
 @enduml
 
 ### Сценарій DeleteAccount
