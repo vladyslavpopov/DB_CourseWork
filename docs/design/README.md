@@ -2,7 +2,6 @@
 
 # Модель бізнес-об'єктів
 
-```
 @startuml
 
 left to right direction
@@ -81,8 +80,6 @@ Admin -- DeleteAccount
 Admin -- CommentModeration
 
 @enduml
-
-```
 
 # ER-модель
 
