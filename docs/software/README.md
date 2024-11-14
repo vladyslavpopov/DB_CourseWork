@@ -1,5 +1,9 @@
-Реалізація інформаційного та програмного забезпечення
+# Реалізація інформаційного та програмного забезпечення
 
+
+## SQL-скрипт для створення початкового наповнення бази даних
+
+```sql
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -225,3 +229,6 @@ INSERT INTO `mydb`.`UserRole` (`User_id`, `User_id1`, `Role_id`) VALUES
 (5, 5, 5);
 
 COMMIT;
+```
+
+## RESTfull сервіс для управління даними
